@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_exit"
+        android:icon="@drawable/baseline_exit_to_app_white_24"
+        android:iconTint="@android:color/white"
+        android:title="Logout"
+        app:showAsAction="always" />
+
+
+
+</menu>

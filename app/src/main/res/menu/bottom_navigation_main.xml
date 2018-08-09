@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_training"
+        android:enabled="true"
+        android:icon="@drawable/baseline_fitness_center_white_24"
+        android:title="Training"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_chat"
+        android:enabled="true"
+        android:icon="@drawable/baseline_chat_white_24"
+        android:title="Chat"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_notifications"
+        android:enabled="true"
+        android:icon="@drawable/baseline_notification_important_white_24"
+        android:title="Notifications"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_profile"
+        android:enabled="true"
+        android:icon="@drawable/baseline_account_circle_white_24"
+        android:title="Profile"
+        app:showAsAction="ifRoom" />
+</menu>

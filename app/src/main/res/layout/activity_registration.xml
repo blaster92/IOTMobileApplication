@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:alpha="0.8"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/p3" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        app:srcCompat="@android:color/darker_gray" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="20dp"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:clipToPadding="false"
+            android:elevation="4dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#F5F5F5"
+                android:clipToPadding="false"
+                android:elevation="4dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_below="@+id/phone"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/address_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_place_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Address"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPostalAddress"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_below="@+id/date_of_birth"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/phone_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_phone_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Telephone number"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_below="@+id/textView"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/name_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_account_circle_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/confirm_password"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/email_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_email_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Email"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/surname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_below="@+id/name"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/surname_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_account_circle_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Surname"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/date_of_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_below="@+id/confirm_email"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/date_of_birth_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_accessibility_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Date of birth"
+                        android:imeOptions="actionNext"
+                        android:inputType="date"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/confirm"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/address"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="#856A5D"
+                    android:elevation="4dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="Sign up"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_below="@+id/password"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="#922f2f2f">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/confirm_password_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_vpn_key_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Confirm password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_below="@+id/surname"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    app:passwordToggleContentDescription="pas"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="#922f2f2f">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/password_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_vpn_key_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/confirm_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_below="@+id/email"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/confirm_email_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_email_white_24dp"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="#922f2f2f"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Confirm email"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Join us"
+        android:textColor="@android:color/white"
+        android:textColorLink="@android:color/white"
+        android:textSize="30sp" />
+
+</RelativeLayout>

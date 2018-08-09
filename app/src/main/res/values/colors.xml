@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#cfd8dc</color>
+    <color name="colorPrimaryDark">#3f8793</color>
+    <color name="colorAccent">#922f2f2f</color>
+    <color name="underline">#263238</color>
+    <color name="bottom_nav">#bdffffff</color>
+
+</resources>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "868028971135",
+    "firebase_url": "https://smartgym-d2e5d.firebaseio.com",
+    "project_id": "smartgym-d2e5d",
+    "storage_bucket": "smartgym-d2e5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868028971135:android:d0b38df6f93517e2",
+        "android_client_info": {
+          "package_name": "polito.iot.iotmobileapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868028971135-o3ijg20kq2u4epbn6h6levl1aqgf8gfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxqfGYG4Is-Y3PHHF5C3frY-mODRyaEKE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
