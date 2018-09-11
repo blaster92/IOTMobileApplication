@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
     @Override
     public void findUserProfile(Intent intent) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/getuserbyid",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/profile/show",
                 new Response.Listener<String>() {
 
                     @Override
@@ -106,7 +106,7 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
     @Override
     public void findSchedules(Intent intent) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/getschedulesandexerciselistbyuserid",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/schedules/get-all-with-exercises",
                 new Response.Listener<String>() {
 
                     @Override
@@ -175,7 +175,7 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
     @Override
     public void findMessages(Intent intent) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.SERVER_ADDRESS+ "/getmessages",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/messages/get",
                 new Response.Listener<String>() {
 
                     @Override
@@ -309,14 +309,31 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
 
                 if (position == 1){
 
+                    try {
+                        myCookieManager = new MyCookieManager(new URI(getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")));
+                        myCookieManager.addMyCookie("token",getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("token",""));
+                        CookieHandler.setDefault(myCookieManager);
+
+                    }catch(Exception e){}
                     findMessages(new Intent());
 
                 } else if (position == 0){
 
+                    try {
+                        myCookieManager = new MyCookieManager(new URI(getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")));
+                        myCookieManager.addMyCookie("token",getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("token",""));
+                        CookieHandler.setDefault(myCookieManager);
+
+                    }catch(Exception e){}
                     findSchedules(new Intent());
 
                 } else if (position == 2){
+                    try {
+                        myCookieManager = new MyCookieManager(new URI(getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")));
+                        myCookieManager.addMyCookie("token",getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("token",""));
+                        CookieHandler.setDefault(myCookieManager);
 
+                    }catch(Exception e){}
                     findUserProfile(new Intent());
 
                 }
@@ -340,7 +357,7 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
         }
 
         try {
-            myCookieManager = new MyCookieManager(new URI(Constants.SERVER_ADDRESS));
+            myCookieManager = new MyCookieManager(new URI(getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")));
             myCookieManager.addMyCookie("token",getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("token",""));
             CookieHandler.setDefault(myCookieManager);
 

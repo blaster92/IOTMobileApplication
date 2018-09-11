@@ -129,7 +129,7 @@ public class ServiceActivity extends AppCompatActivity {
             }
         });
         try {
-            myCookieManager = new MyCookieManager(new URI(Constants.SERVER_ADDRESS));
+            myCookieManager = new MyCookieManager(new URI(getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")));
             myCookieManager.addMyCookie("token",getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("token",""));
             CookieHandler.setDefault(myCookieManager);
 
@@ -137,7 +137,7 @@ public class ServiceActivity extends AppCompatActivity {
 
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/getexercisesbyscheduleid",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/get_exercises_by_schedule",
                 new Response.Listener<String>() {
 
                     @Override

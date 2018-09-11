@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import polito.iot.iotmobileapplication.utils.Constants;
+import polito.iot.iotmobileapplication.utils.MyCookieManager;
 import polito.iot.iotmobileapplication.utils.User;
 
 /**
@@ -108,13 +109,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else {
 
                     try {
-                        CookieManager manager = new CookieManager();
-                        manager.getCookieStore().add(new URI(getIntent().getStringExtra("server_ip")), new HttpCookie("app-id", "val"));
-                        CookieHandler.setDefault(manager);
+                        MyCookieManager myCookieManager = new MyCookieManager(new URI(getIntent().getStringExtra("server_ip")));
+                        myCookieManager.addMyCookie("token",getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("token",""));
+                        CookieHandler.setDefault(myCookieManager);
 
                     }catch(Exception e){}
 
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.78:9000/signup",
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, getIntent().getStringExtra("server_ip")+"/mobile-app/register-user",
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {

@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }catch(Exception e){}
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url+ "/logging",
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url+ "/mobile-app/logging",
                         new Response.Listener<String>() {
 
                             @Override
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 url = "http://"+server_ip.getText().toString();
 
                 Intent i = new Intent(getApplicationContext(),RegistrationActivity.class);
-                i.putExtra("server_id",url);
+                i.putExtra("server_ip",url);
                 startActivity(i);
 
             }
@@ -150,12 +150,15 @@ public class MainActivity extends AppCompatActivity {
 
         //Check whether the user is already logged
         try {
+            url = "http://"+server_ip.getText().toString();
+
+            myCookieManager = new MyCookieManager(new URI(url));
             myCookieManager.addMyCookie("token",getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("token",""));
             CookieHandler.setDefault(myCookieManager);
 
         }catch(Exception e){}
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/isLogged",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/isLogged",
                 new Response.Listener<String>() {
 
                     @Override
