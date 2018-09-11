@@ -137,7 +137,7 @@ public class ServiceActivity extends AppCompatActivity {
 
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.SERVER_ADDRESS+ "/getexercisesbyscheduleid",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/getexercisesbyscheduleid",
                 new Response.Listener<String>() {
 
                     @Override

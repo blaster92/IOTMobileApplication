@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout email_layout, password_layout;
     private TextInputEditText email_edit, password_edit;
     private MyCookieManager myCookieManager;
+    private EditText server_ip;
+    private String url;
 
 
     @Override
@@ -53,13 +56,10 @@ public class MainActivity extends AppCompatActivity {
         //startService(new Intent(getApplicationContext(),MyFirebaseInstanceIdService.class));
         System.out.println("FIREBASE " + FirebaseInstanceId.getInstance().getToken());
 
-        try {
+        server_ip = (EditText) findViewById(R.id.server_ip);
 
-            myCookieManager = new MyCookieManager(new URI(Constants.SERVER_ADDRESS));
 
-            CookieHandler.setDefault(myCookieManager);
 
-        }catch(Exception e){}
 
         email_edit = (TextInputEditText) findViewById(R.id.email_edit);
         password_edit = (TextInputEditText) findViewById(R.id.password_edit);
@@ -69,7 +69,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.SERVER_ADDRESS+ "/logging",
+
+                url = "http://"+server_ip.getText().toString();
+                try {
+
+                    myCookieManager = new MyCookieManager(new URI(url));
+
+                    CookieHandler.setDefault(myCookieManager);
+
+                }catch(Exception e){}
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url+ "/logging",
                         new Response.Listener<String>() {
 
                             @Override
@@ -81,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                     JSONObject jsonObject = new JSONObject(response);
 
                                     if(jsonObject.optBoolean("status")){
+                                        getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("server_ip",url).apply();                                        Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
 
                                         getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("token",jsonObject.optString("token")).apply();                                        Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(getApplicationContext(),HomeActivity.class);
@@ -121,7 +132,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                url = "http://"+server_ip.getText().toString();
+
                 Intent i = new Intent(getApplicationContext(),RegistrationActivity.class);
+                i.putExtra("server_id",url);
                 startActivity(i);
 
             }
@@ -141,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
         }catch(Exception e){}
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.SERVER_ADDRESS+ "/isLogged",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/isLogged",
                 new Response.Listener<String>() {
 
                     @Override

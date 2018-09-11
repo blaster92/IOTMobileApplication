@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.PhantomReference;
 import java.net.CookieHandler;
 import java.net.URI;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
     @Override
     public void findUserProfile(Intent intent) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.SERVER_ADDRESS+ "/getuserbyid",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/getuserbyid",
                 new Response.Listener<String>() {
 
                     @Override
@@ -105,7 +106,7 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
     @Override
     public void findSchedules(Intent intent) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.SERVER_ADDRESS+ "/getschedulesandexerciselistbyuserid",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/getschedulesandexerciselistbyuserid",
                 new Response.Listener<String>() {
 
                     @Override
@@ -435,13 +436,16 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
         FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.SERVER_ADDRESS+ "/logout",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/logout",
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         System.out.println("RESPONSE " + response);
+                        getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("server_ip","").apply();
+                        Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+
 
                     }
                 }, new Response.ErrorListener() {

@@ -109,7 +109,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     try {
                         CookieManager manager = new CookieManager();
-                        manager.getCookieStore().add(new URI(Constants.SERVER_ADDRESS), new HttpCookie("app-id", "val"));
+                        manager.getCookieStore().add(new URI(getIntent().getStringExtra("server_ip")), new HttpCookie("app-id", "val"));
                         CookieHandler.setDefault(manager);
 
                     }catch(Exception e){}
@@ -127,6 +127,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
                                             Toast.makeText(getApplicationContext(), "Signed up successfully", Toast.LENGTH_SHORT).show();
                                             getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("token",jsonObject.optString("token")).apply();
+                                            getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("server_ip",getIntent().getStringExtra("server_ip")).apply();
+
                                             Intent i = new Intent(getApplicationContext(),HomeActivity.class);
                                             startActivity(i);
 
