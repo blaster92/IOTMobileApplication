@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/r"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Name"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/description_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/r"
+        android:layout_below="@+id/r"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Description"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/muscular_zone_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/description_txt"
+        android:layout_below="@+id/description_txt"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Muscolar zone"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/repetitions_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/muscular_zone_txt"
+        android:layout_below="@+id/muscolar_zone"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Repetitions"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/weight_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/repetitions_txt"
+        android:layout_below="@+id/repetitions"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Load (kg)"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/details_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/weight_txt"
+        android:layout_below="@+id/weight"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Notes"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/muscolar_zone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/muscular_zone_txt"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_toEndOf="@+id/muscular_zone_txt"
+        android:fontFamily="@font/roboto_regular"
+        android:text="TextView"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/repetitions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/muscolar_zone"
+        android:layout_alignTop="@+id/repetitions_txt"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@+id/repetitions_txt"
+        android:fontFamily="@font/roboto_regular"
+        android:text="TextView"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/repetitions"
+        android:layout_alignTop="@+id/weight_txt"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@+id/weight_txt"
+        android:fontFamily="@font/roboto_regular"
+        android:text="TextView"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/weight"
+        android:layout_alignTop="@+id/details_txt"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@+id/details_txt"
+        android:fontFamily="@font/roboto_regular"
+        android:text="TextView"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <WebView
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/details_txt"
+        android:layout_marginTop="20dp" >
+
+    </WebView>
+
+</RelativeLayout>

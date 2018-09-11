@@ -6,15 +6,18 @@ package polito.iot.iotmobileapplication.utils;
 
 public class Exercise {
 
-    private String name, duration, description;
-    private int series, numbers;
+    private String name, muscolar_zone, description, details,url;
+    private int repetitions;
+    private float weight;
 
-    public Exercise(String name, String duration, String description, int series, int numbers) {
+    public Exercise(String name, String muscolar_zone, String description, String details, int repetitions, float weight,String url) {
         this.name = name;
-        this.duration = duration;
+        this.muscolar_zone = muscolar_zone;
         this.description = description;
-        this.series = series;
-        this.numbers = numbers;
+        this.details = details;
+        this.repetitions = repetitions;
+        this.weight = weight;
+        this.url = url;
     }
 
     public String getName() {
@@ -25,12 +28,12 @@ public class Exercise {
         this.name = name;
     }
 
-    public String getDuration() {
-        return duration;
+    public String getMuscolarZone() {
+        return muscolar_zone;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setMuscolarZone(String muscolar_zone) {
+        this.muscolar_zone = muscolar_zone;
     }
 
     public String getDescription() {
@@ -41,19 +44,35 @@ public class Exercise {
         this.description = description;
     }
 
-    public int getSeries() {
-        return series;
+    public String getDetails() {
+        return details;
     }
 
-    public void setSeries(int series) {
-        this.series = series;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
-    public int getNumbers() {
-        return numbers;
+    public int getRepetitions() {
+        return repetitions;
     }
 
-    public void setNumbers(int numbers) {
-        this.numbers = numbers;
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -1,16 +1,16 @@
 package polito.iot.iotmobileapplication.utils;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import polito.iot.iotmobileapplication.R;
 
@@ -33,6 +33,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
 
 
         private TextView title;
+        private ImageButton info;
 
 
         private ViewHolder(View v) {
@@ -40,13 +41,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
 
         }
 
-
-        public ViewHolder(View itemView, TextView title){
-            super(itemView);
-            this.title = title;
-
-
-        }
 
     }
 
@@ -57,7 +51,9 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
                 .inflate(R.layout.exercise_entry, parent, false);
         ExerciseAdapter.ViewHolder vh = new ExerciseAdapter.ViewHolder(v);
 
-        vh.title = (TextView) v.findViewById(R.id.name);
+        vh.title = (TextView) v.findViewById(R.id.title);
+        vh.info = (ImageButton) v.findViewById(R.id.info_btn);
+
 
 
         return vh;
@@ -76,10 +72,32 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ExerciseAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ExerciseAdapter.ViewHolder holder, final int position) {
 
         holder.title.setText(exercises.get(position).getName());
 
+        holder.info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ExerciseDialogFragment fragment = new ExerciseDialogFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("name",exercises.get(position).getName());
+                bundle.putString("description",exercises.get(position).getDescription());
+                bundle.putString("details",exercises.get(position).getDetails());
+                bundle.putInt("repetitions",exercises.get(position).getRepetitions());
+                bundle.putFloat("weight",exercises.get(position).getWeight());
+                bundle.putString("muscolar_zone",exercises.get(position).getMuscolarZone());
+                bundle.putString("url",exercises.get(position).getUrl());
+
+                fragment.setArguments(bundle);
+
+                fragment.show(((FragmentActivity)mContext).getSupportFragmentManager(),"exercise_info");
+
+
+            }
+        });
 
         switch (position){
 

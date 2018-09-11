@@ -1,19 +1,22 @@
 package polito.iot.iotmobileapplication.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import polito.iot.iotmobileapplication.R;
+import polito.iot.iotmobileapplication.core.ServiceActivity;
 
 /**
  * Created by user on 06/08/2018.
@@ -36,23 +39,25 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         private TextView title;
         private TextView subtitle;
         private ImageView logo;
-        private Button action;
         private TextView status;
         private TextView duration;
         private RecyclerView exercise_rv;
         private ArrayList<Exercise> exercise_list;
+        private FloatingActionButton runBtn;
+        private FloatingActionButton infoBtn;
 
         private ViewHolder(View v) {
             super(v);
 
         }
 
-        public ViewHolder(View itemView, TextView title, TextView subtitle, ImageView logo, Button action, TextView status, TextView duration, RecyclerView exercise_rv) {
+        public ViewHolder(View itemView, TextView title, TextView subtitle, ImageView logo, TextView status, TextView duration, RecyclerView exercise_rv, FloatingActionButton runBtn, FloatingActionButton infoBtn) {
             super(itemView);
             this.title = title;
             this.subtitle = subtitle;
             this.logo = logo;
-            this.action = action;
+            this.runBtn = runBtn;
+            this.infoBtn = infoBtn;
             this.status = status;
             this.duration = duration;
             this.exercise_rv = exercise_rv;
@@ -71,32 +76,67 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         ViewHolder vh = new ViewHolder(v);
 
         vh.title = ((TextView)v.findViewById(R.id.title));
-        vh.subtitle = (TextView) v.findViewById(R.id.subtitle);
+        vh.infoBtn = ((FloatingActionButton) v.findViewById(R.id.info_action));
+        vh.runBtn = ((FloatingActionButton) v.findViewById(R.id.action));
+        //vh.subtitle = (TextView) v.findViewById(R.id.subtitle);
         vh.exercise_rv = (RecyclerView) v.findViewById(R.id.exercise_rv);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.title.setText(this.schedules.get(position).getName());
-        holder.subtitle.setText(this.schedules.get(position).getObjective());
+        //holder.subtitle.setText(this.schedules.get(position).getObjective());
 
         ExerciseAdapter exerciseAdapter = new ExerciseAdapter(this.mContext);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.mContext,3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.mContext,1);
         holder.exercise_rv.setLayoutManager(gridLayoutManager);
         holder.exercise_rv.setAdapter(exerciseAdapter);
 
-        for (Exercise e : (ArrayList<Exercise>)this.schedules.get(position).getExercises())
+        holder.infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        exerciseAdapter.exercises.add(new Exercise("AAA","20","bello",20,20));
-        exerciseAdapter.exercises.add(new Exercise("BB","20","bello1",4,11));
-        exerciseAdapter.exercises.add(new Exercise("CC","20","bello2",2,55));
-        exerciseAdapter.exercises.add(new Exercise("DD","20","bello3",10,55));
-        exerciseAdapter.exercises.add(new Exercise("EE","20","bello4",2,55));
+                ScheduleBottomSheetFragment fragment = new ScheduleBottomSheetFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("name",schedules.get(position).getName());
+                bundle.putString("details",schedules.get(position).getDetails());
+                bundle.putString("objective",schedules.get(position).getObjective());
+                bundle.putString("start_date",schedules.get(position).getStartDate());
+                bundle.putString("end_date",schedules.get(position).getEndDate());
+                bundle.putInt("days",schedules.get(position).getDays());
+
+                fragment.setArguments(bundle);
+
+                fragment.show(((FragmentActivity)mContext).getSupportFragmentManager(),"info");
+
+            }
+        });
+
+
+        holder.runBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent i = new Intent(mContext, ServiceActivity.class);
+
+                i.putExtra("id_schedule",schedules.get(position).getID());
+                mContext.startActivity(i);
+
+            }
+        });
+
+        for (Exercise e : (ArrayList<Exercise>)this.schedules.get(position).getExercises())
+            exerciseAdapter.exercises.add(new Exercise(e.getName(),e.getMuscolarZone(),e.getDescription(),e.getDetails(),e.getRepetitions(),e.getWeight(),e.getUrl()));
+
 
 
     }
+
+
 
 
     @Override

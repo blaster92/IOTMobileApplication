@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "868028971135-v621gsb1jk9ndgloeuhr8bk36lb3vlj2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "polito.iot.iotmobileapplication",
+            "certificate_hash": "00ac4b8ba6391daf2324629b8467de2d27cbc219"
+          }
+        },
+        {
           "client_id": "868028971135-o3ijg20kq2u4epbn6h6levl1aqgf8gfq.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868028971135-o3ijg20kq2u4epbn6h6levl1aqgf8gfq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

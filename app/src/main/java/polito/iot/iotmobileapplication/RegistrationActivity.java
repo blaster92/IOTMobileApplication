@@ -22,9 +22,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.HttpCookie;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+import polito.iot.iotmobileapplication.utils.Constants;
 import polito.iot.iotmobileapplication.utils.User;
 
 /**
@@ -102,7 +107,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 } else {
 
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.78/php_IoT/android/register.php",
+                    try {
+                        CookieManager manager = new CookieManager();
+                        manager.getCookieStore().add(new URI(Constants.SERVER_ADDRESS), new HttpCookie("app-id", "val"));
+                        CookieHandler.setDefault(manager);
+
+                    }catch(Exception e){}
+
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.78:9000/signup",
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
@@ -111,9 +123,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
                                     try {
                                         JSONObject jsonObject = new JSONObject(response);
-                                        if (jsonObject.optBoolean("success") == true){
+                                        if (jsonObject.optBoolean("status") == true){
 
                                             Toast.makeText(getApplicationContext(), "Signed up successfully", Toast.LENGTH_SHORT).show();
+                                            getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("token",jsonObject.optString("token")).apply();
+                                            Intent i = new Intent(getApplicationContext(),HomeActivity.class);
+                                            startActivity(i);
+
+
                                             finish();
 
                                         } else if (jsonObject.optInt("error_code") == 2){
