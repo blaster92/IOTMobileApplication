@@ -63,21 +63,20 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
     @Override
     public void findUserProfile(Intent intent) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE, MODE_PRIVATE).getString("server_ip", "") + "/mobile-app/profile/show",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/profile/show",
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         System.out.println("RESPONSE " + response);
-                        Fragment f = ((ViewPagerAdapter) viewPager.getAdapter()).getItem(viewPager.getCurrentItem());
-                        if (f instanceof ProfileFragment) {
+                        Fragment f = ((ViewPagerAdapter)viewPager.getAdapter()).getItem(viewPager.getCurrentItem());
+                        if(f instanceof ProfileFragment){
 
                             try {
 
                                 JSONObject obj = new JSONObject(response);
 
-/*
                                 User user = new User(obj.optString("name"),
                                         obj.optString("surname"),
                                         obj.optString("email"),
@@ -86,17 +85,11 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
                                         obj.optString("address"),
                                         obj.optString("birth_date"),
                                         obj.optString("end_date"));
-*/
-                                User user = new User("Matteo", "Novembre", "matteo.novembre94@gmail.com", "349555555", "", "via Dante 43", "24/01/1994", "08/09/2018");
 
                                 ((ProfileFragment) f).setUserDetails(user);
 
-                            } catch (JSONException e) {
+                                } catch (JSONException e) {
                                 e.printStackTrace();
-                                User user = new User("Matteo", "Novembre", "matteo.novembre94@gmail.com", "349555555", "", "via Dante 43", "24/01/1994", "08/09/2018");
-
-                                ((ProfileFragment) f).setUserDetails(user);
-
                             }
                         }
                     }
@@ -106,47 +99,34 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
 
                 error.printStackTrace();
             }
-        });
+        } );
         Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
-        Fragment f = ((ViewPagerAdapter) viewPager.getAdapter()).getItem(viewPager.getCurrentItem());
-
-        User user = new User("Matteo", "Novembre", "matteo.novembre94@gmail.com", "349555555", "", "via Dante 43", "24/01/1994", "2018-10-20");
-
-
-        ((ProfileFragment) f).setUserDetails(user);
-
     }
 
     @Override
     public void findSchedules(Intent intent) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE, MODE_PRIVATE).getString("server_ip", "") + "/mobile-app/schedules/get-all-with-exercises",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/schedules/get-all-with-exercises",
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         System.out.println("RESPONSE " + response);
-                        Fragment f = ((ViewPagerAdapter) viewPager.getAdapter()).getItem(viewPager.getCurrentItem());
-                        if (f instanceof TrainingFragment) {
+                        Fragment f = ((ViewPagerAdapter)viewPager.getAdapter()).getItem(viewPager.getCurrentItem());
+                        if(f instanceof TrainingFragment){
 
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
                                 ArrayList<Schedule> list = new ArrayList<>();
                                 ArrayList<Exercise> e = new ArrayList<>();
-                                for (int i = 0; i < jsonArray.length(); i++) {
+                                for (int i = 0;i<jsonArray.length();i++){
 
-                                    JSONObject obj = (JSONObject) jsonArray.get(i);
+                                    JSONObject obj = (JSONObject)jsonArray.get(i);
                                     JSONObject schedule_obj = obj.getJSONObject("schedule");
                                     JSONArray exercise_arr = obj.getJSONArray("lists");
 
-                                    e.add(new Exercise("Butterfly", "chest", "improvement of different muscular zones", "Some details", 20, 20f, "https://www.youtube.com/watch?v=HtA6wD-3bDA"));
-                                    e.add(new Exercise("Tricipes machines", "tricipes", "tricipes develpoment", "Some details", 15, 30f, "https://www.youtube.com/watch?v=HtA6wD-3bDA"));
-                                    e.add(new Exercise("Panca hyperextension", "shoulders", "shoulders develpoment", "Some details", 10, 40f, "https://www.youtube.com/watch?v=vztkTr4g904"));
-
-
-
-                                    /*for (int j = 0;j<exercise_arr.length();j++){
+                                    for (int j = 0;j<exercise_arr.length();j++){
 
                                         JSONObject ex_obj = (JSONObject)exercise_arr.get(j);
                                         Exercise exercise = new Exercise(ex_obj.optString("name"),ex_obj.optString("muscular_zone"),ex_obj.optString("description"),ex_obj.optString("details"),ex_obj.optInt("repetitions"),Float.parseFloat(String.valueOf(ex_obj.optDouble("weight"))),ex_obj.optString("url"));
@@ -163,17 +143,16 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
                                             schedule_obj.getString("start_date"),
                                             schedule_obj.getString("end_date"),
                                             schedule_obj.getInt("days"),
-                                            e);//)ArrayList<Exercise>)obj.opt("exercise_list"));*/
-                                    Schedule schedule = new Schedule("3", "My schedule", "Weight loosing", "This schedule aims at loosing fat and tonify muscles", "20/08/2018", "20/10/2018", 3, e);
+                                            e);//)ArrayList<Exercise>)obj.opt("exercise_list"));
                                     list.add(schedule);
 
                                 }
                                 ((TrainingFragment) f).addScheduleList(list);
 
 
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
                             }
 
                         }
@@ -183,64 +162,14 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
             @Override
             public void onErrorResponse(VolleyError error) {
 
-
                 error.printStackTrace();
             }
-        });
-        //Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+        } );
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
 
-
-
-            Handler h = new Handler();
-            h.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    ArrayList<Schedule> list = new ArrayList<>();
-                    ArrayList<Exercise> e = new ArrayList<>();
-
-                    e.add(new Exercise("Butterfly", "Chest", "Improvement of different muscular zones", "No available notes", 20, 20f, "https://www.youtube.com/watch?v=HtA6wD-3bDA"));
-                    e.add(new Exercise("Tricipes machines", "Tricipes", "Tricipes develpoment", "Some details", 15, 30f, "https://www.youtube.com/watch?v=VYgVTinbx_A"));
-                    e.add(new Exercise("Panca hyperextension", "Shoulders", "Shoulders develpoment", "Some details", 10, 40f, "https://www.youtube.com/watch?v=vztkTr4g904"));
-                    e.add(new Exercise("French press", "Biceps", "Biceps develpoment", "Some details", 20, 20f, "https://www.youtube.com/watch?v=EWBBZb81AIo"));
-                    e.add(new Exercise("Shoulder press", "Shoulder", "Shoulder develpoment", "Some details", 10, 35f, "https://www.youtube.com/watch?v=iaIGgpHj-xs"));
-                    e.add(new Exercise("Lat machine", "Back", "Back posturing fix", "Some details", 30,10f, "https://www.youtube.com/watch?v=NL6Lqd6nU-g"));
-
-
-
-
-                                    /*for (int j = 0;j<exercise_arr.length();j++){
-
-                                        JSONObject ex_obj = (JSONObject)exercise_arr.get(j);
-                                        Exercise exercise = new Exercise(ex_obj.optString("name"),ex_obj.optString("muscular_zone"),ex_obj.optString("description"),ex_obj.optString("details"),ex_obj.optInt("repetitions"),Float.parseFloat(String.valueOf(ex_obj.optDouble("weight"))),ex_obj.optString("url"));
-                                        e.add(exercise);
-
-                                    }
-
-
-                                    Schedule schedule = new Schedule(
-                                            schedule_obj.getString("id_schedule"),
-                                            schedule_obj.getString("name"),
-                                            schedule_obj.getString("objective"),
-                                            schedule_obj.getString("details"),
-                                            schedule_obj.getString("start_date"),
-                                            schedule_obj.getString("end_date"),
-                                            schedule_obj.getInt("days"),
-                                            e);//)ArrayList<Exercise>)obj.opt("exercise_list"));*/
-                    Schedule schedule = new Schedule("3", "My schedule", "Weight loosing", "This schedule aims at loosing fat and tonify muscles", "2018-08-20", "2018-10-18", 3, e);
-                    list.add(schedule);
-
-
-                    Fragment f = ((ViewPagerAdapter) viewPager.getAdapter()).getItem(viewPager.getCurrentItem());
-
-                    if (f instanceof TrainingFragment)
-                        ((TrainingFragment) f).addScheduleList(list);
-
-                }
-            },200);
 
 
     }
-
 
 
     @Override
@@ -260,7 +189,6 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
                                 JSONArray jsonArray = new JSONArray(response);
                                 ArrayList<Message> list = new ArrayList<>();
 
-
                                 for (int i = 0;i<jsonArray.length();i++){
 
                                     JSONObject obj = (JSONObject)jsonArray.get(i);
@@ -278,12 +206,7 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
-
-
                             }
-
-
 
                         }
 
@@ -293,30 +216,9 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
             public void onErrorResponse(VolleyError error) {
 
                 error.printStackTrace();
-
-
             }
         } );
-        //Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
-
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ArrayList<Message> list = new ArrayList<>();
-                list.add(new Message("Summer holidays","This gym will be closed from 01-08-2018 to 10-09-2018 due to summer holidays.","2018-07-16"));
-                list.add(new Message("Summer promotions","Only for June and July, 40% sales on the subscription.","2018-05-14"));
-                Fragment f = ((ViewPagerAdapter)viewPager.getAdapter()).getItem(viewPager.getCurrentItem());
-
-
-                ((NotificationFragment) f).addMessages(list);
-            }
-        },200);
-
-
-
-
-
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
     }
 
     private void displayLastMessage(){
@@ -566,10 +468,6 @@ public class HomeActivity extends AppCompatActivity implements TrainingFragment.
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("server_ip","").apply();
-                Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
-
 
                 error.printStackTrace();
             }

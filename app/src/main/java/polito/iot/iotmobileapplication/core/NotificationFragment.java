@@ -93,7 +93,7 @@ public class NotificationFragment extends Fragment {
 
     public void showLastMessage(){
 
-/*        if (adapter.messages.size()>0) {
+        if (adapter.messages.size()>0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle(adapter.messages.get(0).getTitle());
             builder.setMessage(adapter.messages.get(0).getBody());
@@ -101,15 +101,7 @@ public class NotificationFragment extends Fragment {
 
             builder.create().show();
 
-        }*/
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Summer holidays");
-        builder.setMessage("This gym will be closed from 01-08-2018 to 10-09-2018 due to summer holidays.");
-        builder.setCancelable(true);
-
-        builder.create().show();
-
+        }
 
     }
 }

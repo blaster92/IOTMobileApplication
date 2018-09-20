@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -173,6 +174,21 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             return params;
 
+                        }
+                        @Override
+                        protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                            // since we don't know which of the two underlying network vehicles
+                            // will Volley use, we have to handle and store session cookies manually
+                            Log.i("response",response.headers.toString());
+                            Map<String, String> responseHeaders = response.headers;
+                            String rawCookies = responseHeaders.get("Set-Cookie");
+                            if (rawCookies.contains("token"))
+                                getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("token",rawCookies.split("=")[1]).apply();
+
+                            //Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+
+                            Log.i("cookies",rawCookies);
+                            return super.parseNetworkResponse(response);
                         }
                     };
 

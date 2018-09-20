@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -92,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
                                     if(jsonObject.optBoolean("status")){
                                         getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("server_ip",url).apply();                                        Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+                                        //getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("token",jsonObject.optString("token")).apply();                                        Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
 
-                                        getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("token",jsonObject.optString("token")).apply();                                        Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(getApplicationContext(),HomeActivity.class);
                                         startActivity(i);
                                         finish();
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
 
                         Log.w("Error",error);
+                        Toast.makeText(getApplicationContext(), "Error during login. Verify your username and/or password", Toast.LENGTH_SHORT).show();
                     }
                 } ) {
 
@@ -122,11 +124,25 @@ public class MainActivity extends AppCompatActivity {
                         return params;
 
                     }
+
+
+
+                    @Override
+                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                        // since we don't know which of the two underlying network vehicles
+                        // will Volley use, we have to handle and store session cookies manually
+                        Log.i("response",response.headers.toString());
+                        Map<String, String> responseHeaders = response.headers;
+                        String rawCookies = responseHeaders.get("Set-Cookie");
+                        //Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+                        if (rawCookies.contains("token"))
+                            getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).edit().putString("token",rawCookies.split("=")[1]).apply();
+
+                        Log.i("cookies",rawCookies);
+                        return super.parseNetworkResponse(response);
+                    }
                 };
-                //Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
-                Intent i = new Intent(getApplicationContext(),HomeActivity.class);
-                startActivity(i);
-                finish();
+                Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
             }
         });
 
@@ -161,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
 
         }catch(Exception e){}
 
-        System.out.println(" url " + getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip",""));
         StringRequest stringRequest = new StringRequest(Request.Method.POST,getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/isLogged",
                 new Response.Listener<String>() {
 
@@ -189,11 +204,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-
-/*                Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getApplicationContext(),HomeActivity.class);
-                startActivity(i);
-                finish();*/
                 error.printStackTrace();
             }
         } );

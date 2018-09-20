@@ -88,7 +88,7 @@ public class ProfileFragment extends Fragment {
             Date d = format.parse(user.end_date);
             Calendar c = Calendar.getInstance();
             c.setTime(d);
-            end_date.setText(c.get(Calendar.DAY_OF_MONTH)+"/"+(c.get(Calendar.MONTH)+1)+"/"+c.get(Calendar.YEAR));
+            end_date.setText(c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR));
 
             if (d.before(new Date()))
                 status.setText("EXPIRED");
