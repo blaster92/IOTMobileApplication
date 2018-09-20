@@ -33,7 +33,7 @@ import polito.iot.iotmobileapplication.R;
 
 public class ServiceEntry extends Fragment {
 
-    private TextView name,muscolar_zone,description,details,repetitions,weigth;
+    private TextView name,muscular_zone,description,details,repetitions,weigth;
     private RelativeLayout background;
     private Button video;
     private FloatingActionButton play_pause, restart;
@@ -51,7 +51,7 @@ public class ServiceEntry extends Fragment {
                 R.layout.service_entry, container, false);
         name = (TextView) rootView.findViewById(R.id.title);
         description = (TextView) rootView.findViewById(R.id.description_txt);
-        muscolar_zone = (TextView) rootView.findViewById(R.id.muscolar_zone);
+        muscular_zone = (TextView) rootView.findViewById(R.id.muscular_zone);
         details = (TextView) rootView.findViewById(R.id.details);
         repetitions = (TextView) rootView.findViewById(R.id.repetitions);
         weigth = (TextView) rootView.findViewById(R.id.weight);
@@ -72,7 +72,7 @@ public class ServiceEntry extends Fragment {
             name.setText(exercise.getString("name"));
             description.setText(exercise.getString("description"));
             details.setText(exercise.getString("details"));
-            muscolar_zone.setText(exercise.getString("muscolar_zone"));
+            muscular_zone.setText(exercise.getString("muscular_zone"));
             repetitions.setText(String.valueOf(exercise.getInt("repetitions")));
             weigth.setText(String.valueOf(exercise.get("weight")));
 

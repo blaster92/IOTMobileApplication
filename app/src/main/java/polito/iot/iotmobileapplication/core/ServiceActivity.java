@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.net.CookieHandler;
 import java.net.URI;
@@ -29,6 +30,7 @@ import java.util.Map;
 
 import polito.iot.iotmobileapplication.R;
 import polito.iot.iotmobileapplication.utils.Constants;
+import polito.iot.iotmobileapplication.utils.Exercise;
 import polito.iot.iotmobileapplication.utils.MyCookieManager;
 import polito.iot.iotmobileapplication.utils.NonSwipeableViewPager;
 import polito.iot.iotmobileapplication.utils.ServiceEntry;
@@ -175,7 +177,31 @@ public class ServiceActivity extends AppCompatActivity {
 
             }
         };;
-        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+        //Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+
+
+
+        try {
+
+            String response = "[{\"name\":\"Butterfly\",\"muscular_zone\":\"Chest\",\"description\":\"Improvement of different muscular zones\",\"details\":\"No available notes\",\"repetitions\":20,\"weight\":20,\"url\":\"https://www.youtube.com/watch?v=HtA6wD-3bDA\"}," +
+                    "{\"name\":\"Tricipes machines\",\"muscular_zone\":\"Tricipes\",\"description\":\"Tricipes develpoment\",\"details\":\"Some details\",\"repetitions\":15,\"weight\":30,\"url\":\"https://www.youtube.com/watch?v=VYgVTinbx_A\"}," +
+                    "{\"name\":\"Panca hyperextension\",\"muscular_zone\":\"Shoulder\",\"description\":\"Shoulders develpoment\",\"details\":\"Some details\",\"repetitions\":10,\"weight\":40,\"url\":\"https://www.youtube.com/watch?v=vztkTr4g904\"}," +
+                    "{\"name\":\"French press\",\"muscular_zone\":\"Biceps\",\"description\":\"Biceps develpoment\",\"details\":\"Some details\",\"repetitions\":20,\"weight\":20,\"url\":\"https://www.youtube.com/watch?v=EWBBZb81AIo\"}," +
+                    "{\"name\":\"Shoulder press\",\"muscular_zone\":\"Shoulder\",\"description\":\"Shoulder develpoment\",\"details\":\"Some details\",\"repetitions\":10,\"weight\":35,\"url\":\"https://www.youtube.com/watch?v=iaIGgpHj-xs\"}," +
+                    "{\"name\":\"Lat machine\",\"muscular_zone\":\"Back\",\"description\":\"Back posturing fix\",\"details\":\"Some details\",\"repetitions\":30,\"weight\":10,\"url\":\"https://www.youtube.com/watch?v=NL6Lqd6nU-g\"}" +
+
+                    "]";
+
+
+            JSONArray arr = new JSONArray(response);
+            mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(),arr);
+            mPager.setAdapter(mPagerAdapter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
 
 
         // Instantiate a ViewPager and a PagerAdapter.

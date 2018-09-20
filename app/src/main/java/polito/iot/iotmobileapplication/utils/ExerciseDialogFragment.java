@@ -31,7 +31,7 @@ public class ExerciseDialogFragment extends DialogFragment {
         ((TextView)rootView.findViewById(R.id.description_txt)).setText(getArguments().getString("description"));
         ((TextView)rootView.findViewById(R.id.repetitions)).setText(String.valueOf(getArguments().getInt("repetitions")));
         ((TextView)rootView.findViewById(R.id.weight)).setText(String.valueOf(getArguments().getFloat("weight")));
-        ((TextView)rootView.findViewById(R.id.muscolar_zone)).setText(getArguments().getString("muscolar_zone"));
+        ((TextView)rootView.findViewById(R.id.muscular_zone)).setText(getArguments().getString("muscular_zone"));
         WebView web = ((WebView) rootView.findViewById(R.id.video));
 
         if (!getArguments().getString("url").equals("")) {

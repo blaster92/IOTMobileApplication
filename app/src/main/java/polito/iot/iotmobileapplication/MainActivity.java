@@ -123,7 +123,10 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 };
-                Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                //Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                Intent i = new Intent(getApplicationContext(),HomeActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -158,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
         }catch(Exception e){}
 
+        System.out.println(" url " + getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip",""));
         StringRequest stringRequest = new StringRequest(Request.Method.POST,getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE,MODE_PRIVATE).getString("server_ip","")+ "/mobile-app/isLogged",
                 new Response.Listener<String>() {
 
@@ -185,6 +189,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+
+/*                Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(),HomeActivity.class);
+                startActivity(i);
+                finish();*/
                 error.printStackTrace();
             }
         } );

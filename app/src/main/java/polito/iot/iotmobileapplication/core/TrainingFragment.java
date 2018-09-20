@@ -112,6 +112,7 @@ public class TrainingFragment extends Fragment {
 
     public void addScheduleList(ArrayList<Schedule> list){
 
+
         scheduleAdapter.schedules.clear();
 
         for (Schedule s : list)

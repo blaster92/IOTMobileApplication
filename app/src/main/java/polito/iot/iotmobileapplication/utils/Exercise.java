@@ -6,13 +6,13 @@ package polito.iot.iotmobileapplication.utils;
 
 public class Exercise {
 
-    private String name, muscolar_zone, description, details,url;
+    private String name, muscular_zone, description, details,url;
     private int repetitions;
     private float weight;
 
-    public Exercise(String name, String muscolar_zone, String description, String details, int repetitions, float weight,String url) {
+    public Exercise(String name, String muscular_zone, String description, String details, int repetitions, float weight,String url) {
         this.name = name;
-        this.muscolar_zone = muscolar_zone;
+        this.muscular_zone = muscular_zone;
         this.description = description;
         this.details = details;
         this.repetitions = repetitions;
@@ -28,12 +28,12 @@ public class Exercise {
         this.name = name;
     }
 
-    public String getMuscolarZone() {
-        return muscolar_zone;
+    public String getMuscularZone() {
+        return muscular_zone;
     }
 
-    public void setMuscolarZone(String muscolar_zone) {
-        this.muscolar_zone = muscolar_zone;
+    public void setMuscularZone(String muscular_zone) {
+        this.muscular_zone = muscular_zone;
     }
 
     public String getDescription() {

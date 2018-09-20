@@ -88,7 +88,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
                 bundle.putString("details",exercises.get(position).getDetails());
                 bundle.putInt("repetitions",exercises.get(position).getRepetitions());
                 bundle.putFloat("weight",exercises.get(position).getWeight());
-                bundle.putString("muscolar_zone",exercises.get(position).getMuscolarZone());
+                bundle.putString("muscular_zone",exercises.get(position).getMuscularZone());
                 bundle.putString("url",exercises.get(position).getUrl());
 
                 fragment.setArguments(bundle);

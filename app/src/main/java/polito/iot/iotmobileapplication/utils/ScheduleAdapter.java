@@ -130,7 +130,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         });
 
         for (Exercise e : (ArrayList<Exercise>)this.schedules.get(position).getExercises())
-            exerciseAdapter.exercises.add(new Exercise(e.getName(),e.getMuscolarZone(),e.getDescription(),e.getDetails(),e.getRepetitions(),e.getWeight(),e.getUrl()));
+            exerciseAdapter.exercises.add(new Exercise(e.getName(),e.getMuscularZone(),e.getDescription(),e.getDetails(),e.getRepetitions(),e.getWeight(),e.getUrl()));
 
 
 
