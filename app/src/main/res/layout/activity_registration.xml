@@ -190,7 +190,7 @@
                         android:fontFamily="@font/roboto_light"
                         android:hint="Date of birth"
                         android:imeOptions="actionNext"
-                        android:inputType="date"
+                        android:inputType="none"
                         android:singleLine="true"
                         android:textSize="14sp" />
                 </android.support.design.widget.TextInputLayout>

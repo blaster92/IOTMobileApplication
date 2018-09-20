@@ -1,6 +1,8 @@
 package polito.iot.iotmobileapplication;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -9,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -24,15 +27,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.HttpCookie;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import polito.iot.iotmobileapplication.utils.Constants;
 import polito.iot.iotmobileapplication.utils.MyCookieManager;
-import polito.iot.iotmobileapplication.utils.User;
 
 /**
  * Created by user on 15/04/2018.
@@ -43,10 +47,15 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button confirm;
     private TextInputEditText name, surname, phone, email, address, password, birth, confirm_email, confirm_password;
     private TextInputLayout email_layout, password_layout, confirm_email_layout, confirm_password_layout;
+    private Calendar myCalendar = Calendar.getInstance();
+    private DatePickerDialog.OnDateSetListener date;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+
 
         name = (TextInputEditText) findViewById(R.id.name_edit);
         surname = (TextInputEditText) findViewById(R.id.surname_edit);
@@ -66,6 +75,38 @@ public class RegistrationActivity extends AppCompatActivity {
         confirm = (Button) findViewById(R.id.confirm);
 
 
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { // API 21
+            birth.setShowSoftInputOnFocus(false);
+        } else { // API 11-20
+            birth.setTextIsSelectable(true);
+        }
+
+
+
+        birth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(RegistrationActivity.this,R.style.CustomDatePickerDialogTheme, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+                datePickerDialog.show();
+            }
+        });
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +147,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     confirm_password.requestFocus();
                     confirm_password_layout.setError("Passwords don't match");
+
 
                 } else {
 
@@ -204,5 +246,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
+    private void updateLabel() {
+        String myFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALY);
+
+        birth.setText(sdf.format(myCalendar.getTime()));
+    }
 
 }
